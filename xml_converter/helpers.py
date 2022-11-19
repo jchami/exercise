@@ -1,10 +1,14 @@
 from xml.dom.minidom import parse
+from xml.parsers.expat import ExpatError
 
 def xml_to_dict(xml_file):
-    xml_dict = {}
-    xml_minidom = parse(xml_file)
-    root = xml_minidom.firstChild
+    try:
+        xml_minidom = parse(xml_file)
+    except ExpatError:
+        return None
 
+    root = xml_minidom.firstChild
+    xml_dict = {}
     xml_dict.update(convert_node(root))
 
     return xml_dict

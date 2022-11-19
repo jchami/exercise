@@ -1,9 +1,18 @@
 <html>
-  <head></head>
+  <head>
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
   <body>
     <form action="/connected/" method="post" enctype="multipart/form-data">
       {% csrf_token %} {{ form }}
       <input type="submit" value="Submit" />
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
     </form>
   </body>
 </html>
